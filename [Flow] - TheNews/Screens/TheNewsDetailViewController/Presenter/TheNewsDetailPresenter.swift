@@ -22,10 +22,32 @@ final class TheNewsDetailPresenter: TheNewsDetailPresenterProtocol {
             description: article.description ?? "",
             url: article.url,
             urlToImage: article.urlToImage ?? "",
-            publishedAt: article.publishedAt ?? Date(),
+            publishedAt: dateFormat(from: article.publishedAt ?? Date()),
             content: article.content ?? "",
             categoryName: selectedCategoryName
         )
         viewController?.displayTheNewsDetailViewModel(viewModel)
+    }
+    
+    private func dateFormat(from date: Date) -> String {
+        let calendar = Calendar.current
+        let now = calendar.startOfDay(for: Date())
+        let startDate = calendar.startOfDay(for: date)
+        
+        let components = calendar.dateComponents([.day], from: startDate, to: now)
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone.current
+        
+        if calendar.isDateInToday(date) {
+            dateFormatter.dateFormat = "'Today,' h:mm a"
+            return dateFormatter.string(from: date)
+        } else if let dayCount = components.day, dayCount > 0 {
+            dateFormatter.dateFormat = "h:mm a "
+            let timeString = dateFormatter.string(from: date)
+            return "\(dayCount) day\(dayCount == 1 ? "" : "s") ago, \(timeString)"
+        } else {
+            dateFormatter.dateFormat = "MMM dd, yyyy, h:mm a"
+            return dateFormatter.string(from: date)
+        }
     }
 }
