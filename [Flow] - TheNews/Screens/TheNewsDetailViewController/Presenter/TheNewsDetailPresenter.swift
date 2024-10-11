@@ -24,7 +24,9 @@ final class TheNewsDetailPresenter: TheNewsDetailPresenterProtocol {
             urlToImage: article.urlToImage ?? "",
             publishedAt: dateFormat(from: article.publishedAt ?? Date()),
             content: article.content ?? "",
-            categoryName: selectedCategoryName
+            categoryName: selectedCategoryName,
+            title: article.title ?? "",
+            followButtonTitle: "Follow"
         )
         viewController?.displayTheNewsDetailViewModel(viewModel)
     }
