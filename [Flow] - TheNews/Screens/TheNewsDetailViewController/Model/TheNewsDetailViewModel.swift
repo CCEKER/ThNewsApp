@@ -13,7 +13,7 @@ struct TheNewsDetailViewModel {
     let description: String
     let url: URL?
     let urlToImage: String
-    let publishedAt: Date
+    let publishedAt: String
     let content: String
     let categoryName: String
 }
