@@ -16,4 +16,6 @@ struct TheNewsDetailViewModel {
     let publishedAt: String
     let content: String
     let categoryName: String
+    let title: String
+    let followButtonTitle: String
 }
